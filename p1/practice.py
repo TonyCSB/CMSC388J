@@ -8,7 +8,7 @@ def hello_world():
     >>> hello_world()
     'Hello, World!'
     """
-    raise NotImplementedError('Please implement this function for full credit')
+    return 'Hello, World!'
 
 
 def sum_unique(l):
@@ -27,7 +27,7 @@ def sum_unique(l):
     >>> sum_unique([2, 2, 2, 2, 1])
     3
     """
-    raise NotImplementedError('Please implement this function for full credit')
+    return sum(set(l))
 
 
 def palindrome(x):
@@ -47,7 +47,7 @@ def palindrome(x):
     >>> palindrome('python')
     False
     """
-    raise NotImplementedError('Please implement this function for full credit')
+    return str(x) == str(x)[::-1]
 
 
 def sum_multiples(num):
@@ -66,7 +66,7 @@ def sum_multiples(num):
     >>> sum_multiples(16) # Multiples: [3, 5, 6, 9, 10, 12, 15]
     60
     """
-    raise NotImplementedError('Please implement this function for full credit')
+    return sum([x for x in range(num) if x % 3 == 0 or x % 5 == 0])
 
 
 def num_func_mapper(nums, funs):
@@ -84,7 +84,7 @@ def num_func_mapper(nums, funs):
     >>> num_func_mapper(num_list, f_list)
     [11, 15]
     """
-    raise NotImplementedError('Please implement this function for full credit')
+    return [f(nums) for f in funs]
 
 
 def validate_grid_indices(grid_indices, grid_size):
@@ -114,7 +114,15 @@ def validate_grid_indices(grid_indices, grid_size):
             (73, 143),
             (143, 213),), 70)
     """
-    raise NotImplementedError('Please implement this function for full credit')
+    if len(grid_indices) not in [1, 2, 3]:
+        raise ValueError("Length of grid_indices is wrong.")
+    
+    for index in grid_indices:
+        if len(index) != 2:
+            raise ValueError("Sub-sequences must be length 2.")
+        elif index[1] - index[0] != grid_size:
+            raise ValueError("Grid indexes do not match grid_size.")
+
 
 
 def pythagorean_triples(n):
@@ -137,4 +145,13 @@ def pythagorean_triples(n):
     >>> pythagorean_triples(20)
     [(3, 4, 5), (6, 8, 10), (5, 12, 13), (9, 12, 15), (8, 15, 17)]
     """
-    raise NotImplementedError('Please implement this function for full credit')
+    ans = []
+
+    for a in range(1, n):
+        for b in range(a, n):
+            for c in range(b, n):
+                if a ** 2 + b ** 2 == c ** 2:
+                    ans.append((a, b, c))
+    
+    return sorted(ans, key=lambda t: t[2])
+
