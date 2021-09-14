@@ -1,6 +1,8 @@
 {% extends "base.html" %}
 {% block content %}
-<h1>Poke-Info website!</h1>
+<h1>Pokemons with {{ ability }} ability</h1>
+<a href={{ url_for("index") }}>Return to front page</a><br/>
+
 <div>
     <ul>
         {% for pokemon in pokemons %}

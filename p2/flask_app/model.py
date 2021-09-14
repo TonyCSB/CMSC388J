@@ -16,16 +16,16 @@ class PokeClient(object):
         for poke_dict in resp.json()['results']:
             pokemon.append(poke_dict['name'])
         return pokemon
-    
+
     def get_pokemon_info(self, pokemon):
         """
         Arguments:
 
         pokemon -- a lowercase string identifying the pokemon
 
-        Returns a dict with info about the Pokemon with the 
+        Returns a dict with info about the Pokemon with the
         following keys and the type of value they map to:
-        
+
         name      -> string
         height    -> int
         weight    -> int
@@ -41,9 +41,9 @@ class PokeClient(object):
         if code != 200:
             raise ValueError(f'Request failed with status code: {code} and message: '
                              f'{resp.text}')
-        
+
         resp = resp.json()
-        
+
         result = {}
 
         result['name'] = resp['name']
@@ -54,13 +54,13 @@ class PokeClient(object):
         moves = []
         for move_dict in resp['moves']:
             moves.append(move_dict['move']['name'])
-        
+
         result['moves'] = moves
 
         abilities = []
         for ability_dict in resp['abilities']:
             abilities.append(ability_dict['ability']['name'])
-        
+
         result['abilities'] = abilities
 
         return result
@@ -84,11 +84,12 @@ class PokeClient(object):
         pokemon = []
         for poke_dict in resp.json()['pokemon']:
             pokemon.append(poke_dict['pokemon']['name'])
-        
+
         return pokemon
 
-## -- Example usage -- ###
-if __name__=='__main__':
+
+# -- Example usage --
+if __name__ == '__main__':
     client = PokeClient()
     l = client.get_pokemon_list()
     print(len(l))
@@ -102,7 +103,6 @@ if __name__=='__main__':
     print(i['height'])
     print(i['abilities'])
     print(len(i['moves']))
-
 
     p = client.get_pokemon_with_ability('tinted-lens')
     print(p)

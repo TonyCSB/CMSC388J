@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>{{ info.name }}</h1>
+<a href={{ url_for("index") }}>Return to front page</a><br/>
+
+<b>Height: </b>{{ info.height }}<br/>
+<b>Weight: </b>{{ info.weight }}<br/>
+<b>Base Experience: </b>{{ info.base_exp }}<br/>
+
+<b>Moves:</b>
+<ul>
+    {% for move in info.moves %}
+        <li>
+            {{ move }}
+        </li>
+    {% endfor %}
+</ul>
+
+<b>Abilities:</b>
+<ul>
+    {% for ability in info.abilities %}
+        <li>
+            <a href={{ url_for("pokemon_with_ability", ability_name=ability) }}>
+                {{ ability }}
+            </a>
+        </li>
+    {% endfor %}
+</ul>
+{% endblock %}
