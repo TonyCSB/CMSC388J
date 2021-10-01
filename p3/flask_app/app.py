@@ -7,8 +7,8 @@ import os
 from datetime import datetime
 
 # local
-from forms import SearchForm, MovieReviewForm
-from model import MovieClient
+from flask_app.forms import SearchForm, MovieReviewForm
+from flask_app.model import MovieClient
 
 app = Flask(__name__)
 app.config["MONGO_URI"] = "mongodb://localhost:27017/movie_reviews"
