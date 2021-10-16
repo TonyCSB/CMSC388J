@@ -17,6 +17,29 @@
 <div class="row">
     <div class="col">
         {# Show all reviews made by the user #}
+        {# Reviews #}
+        <div class="row">
+        <div class="col-md-12">
+            <h1> All reviews made by {{ current_user.username }} <small class="float-right">{{ reviews|length }} reviews</small></h1>
+            <ul class="media-list">
+            {% for review in reviews %}
+            <li class="media review-item">
+                <div class="media-body">
+                <span class="float-right">
+                    <small>{{ review.date }}</small>
+                </span>
+                <a href="{{ url_for('movie_detail', movie_id=review.imdb_id) }}">
+                    <strong>{{ review.movie_title }}</strong>
+                </a>
+                <p>
+                    {{ review.content }}
+                </p>
+                </div>
+            </li>
+            {% endfor %}
+            </ul>
+        </div>
+        </div>
     </div>
 </div>
 {% endblock %}

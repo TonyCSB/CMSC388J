@@ -7,21 +7,61 @@
     </div>
     <div class="col">
         {# Greeting #}
+        <h1>
+            Hello {{ current_user.username }}, welcome to the Movie Reviewer!
+        </h1>
     </div>
 </div>
 <div class="row">
     <div class="col">
         {# Username Update Form #}
+        <div class="container">
+            <form method="POST" action="">
+                {{ usernameUpdateForm.csrf_token }}
+                <div class="form-group">
+                    {{ usernameUpdateForm.username.label }}
+                    {{ usernameUpdateForm.username(class="form-control") }}
+
+                    {% if usernameUpdateForm.username.errors %}
+                    <div class="alert alert-warning" role="alert">
+                        {% for error in usernameUpdateForm.username.errors %}
+                        <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                </div>
+                {{ usernameUpdateForm.submit() }}
+            </form>
+        </div>
     </div>
 </div>
 <div class="row">
     <div class="col">
         {# Profile Picture Update Form #}
+        <div class="container">
+            <form method="POST" action="" enctype="multipart/form-data">
+                {{ profilePicUpdateForm.csrf_token }}
+                <div class="form-group">
+                    {{ profilePicUpdateForm.picture.label }}
+                    {{ profilePicUpdateForm.picture(class="form-control") }}
+
+                    {% if profilePicUpdateForm.picture.errors %}
+                    <div class="alert alert-warning" role="alert">
+                        {% for error in profilePicUpdateForm.picture.errors %}
+                        <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                </div>
+                {{ profilePicUpdateForm.submit() }}
+            </form>
+        </div>
     </div>
 </div>
 <div class="row">
     <div class="col">
         {# Link to see all of the current user's reviews. #}
+        View all of {{ current_user.username }}'s review <a href={{ url_for("user_detail", username=current_user.username) }}>here</a>.
     </div>
 </div>
 {% endblock %}

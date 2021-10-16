@@ -54,12 +54,19 @@ class RegistrationForm(FlaskForm):
 
 
 class LoginForm(FlaskForm):
-    pass
+    username = StringField("Username", validators=[InputRequired(), Length(min=1, max=40)])
+    password = PasswordField("Password", validators=[InputRequired()])
+    submit = SubmitField("Log In")
 
 
 class UpdateUsernameForm(FlaskForm):
-    pass
+    username = StringField("New Username", validators=[InputRequired(), Length(min=1, max=40)])
+    submit = SubmitField("Confirm Username Update")
 
 
 class UpdateProfilePicForm(FlaskForm):
-    pass
+    picture = FileField('New Profile Picture', validators=[
+        FileRequired(),
+        FileAllowed(['jpg', 'png'], 'Images only!')
+    ])
+    submit = SubmitField("Confirm Profile Picture Update")
