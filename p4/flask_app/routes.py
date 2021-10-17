@@ -87,7 +87,7 @@ def user_detail(username):
 
 
 @app.errorhandler(404)
-def custom_404():
+def custom_404(e):
     return render_template("404.html"), 404
 
 
