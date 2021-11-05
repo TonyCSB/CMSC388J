@@ -8,6 +8,7 @@ from ..utils import current_time
 
 movies = Blueprint("movies", __name__)
 
+
 @movies.route("/", methods=["GET", "POST"])
 def index():
     form = SearchForm()
