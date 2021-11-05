@@ -74,6 +74,13 @@ def test_movie_review(client, auth):
 )
 def test_movie_review_redirects(client, movie_id, message):
     url = f"/movies/{movie_id}"
+    response = client.get(url, follow_redirects=False)
+
+    if "404" in message.decode():
+        assert response.status_code == 404
+    else:
+        assert response.status_code == 302
+
     response = client.get(url, follow_redirects=True)
 
     assert message in response.data
