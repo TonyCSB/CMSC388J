@@ -1,0 +1,128 @@
+{% extends "header.html" %}
+{% block content %}
+<div class="container">
+    <div class="col">
+        {% with messages = get_flashed_messages() %}
+        {% for message in messages %}
+        <div class="alert alert-info">
+            {{ message }}
+        </div>
+        {% endfor %}
+        {% endwith %}
+    </div>
+    {% if not m %}
+    <div class="row">
+        <h2>Pending Matches</h2>
+    </div>
+    <div class="row">
+        Wish Lists:
+        <div>
+            <ul>
+                {% for w in g.gifts %}
+                <li>
+                    {{ w }}
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    <div class="row">
+        Shipping Address:
+        {% include "address.html" %}
+    </div>
+    {% else %}
+    <div class="row">
+        <h2>{{ m.status }}</h2>
+    </div>
+
+    <div class="row">
+        From:
+        <div>
+            {{ m.giftSender.username }}
+        </div>
+    </div>
+    <div class="row">
+        To:
+        <div>
+            {{ m.giftReceiver.username }}
+        </div>
+    </div>
+
+    <div class="row">
+        Item:
+        <div>
+            {{ m.giftName }}
+        </div>
+    </div>
+    <div class="row">
+        Shipping Address:
+        {% include "address.html" %}
+    </div>
+    <div class="row">
+        Tracking:
+        <div>
+            {{ m.tracking or "N/A" }}
+        </div>
+    </div>
+    <div class="row">
+        Comment:
+        <div>
+            {{ m.comment|markdown or "Not yet received" }}
+        </div>
+    </div>
+    {% if m.giftReceiver == current_user and m.status == "Tracking Info Entered" %}
+    <form action="/?received=true" method="post">
+        <div class="form-group">
+            <button type=submit class="w-100 btn btn-lg btn-primary">
+                Gift Received
+            </button>
+        </div>
+    </form>
+    {% endif %}
+    {% endif %}
+    {% if form %}
+
+    <hr class="my-4">
+
+    <link href="{{ url_for('static', filename='css/login.css') }}" rel="stylesheet">
+    <div class="text-center __plain_text_READY__ ext-webkit ext-chrome ext-mac">
+        <main class="form-signin">
+            <form action="" method="post">
+                {{ form.csrf_token }}
+
+                <div class="form-floating">
+                    {{ form.tracking(class="form-control", placeholder="tracking") }}
+                    {{ form.tracking.label() }}
+                </div>
+
+                <br/>
+
+                <div class="form-group">
+                    {{ form.submit(class="w-50 btn btn-lg btn-primary") }}
+                </div>
+            </form>
+        </main>
+    </div>
+    {% endif %}
+</div>
+
+{% if c %}
+
+<hr class="my-4">
+
+<style>
+    .flask-pagedown-input {
+        width: 75%
+    }
+</style>
+
+<form method="POST">
+    <div class="container text-center center">
+        {{ c.hidden_tag() }}
+        {{ c.pagedown(rows=3) }}
+        {{ c.submit(class="w-25 btn btn-lg btn-primary") }}
+    </div>
+</form>
+{% endif %}
+
+{% endblock %}

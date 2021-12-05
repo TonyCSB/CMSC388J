@@ -8,7 +8,7 @@ import base64
 
 @login_manager.user_loader
 def load_user(user_id):
-    return User.objects(username=user_id).first()
+    return User.objects(id=user_id).first()
 
 
 class User(db.Document, UserMixin):
@@ -18,7 +18,7 @@ class User(db.Document, UserMixin):
 
     # Returns unique string identifying our object
     def get_id(self):
-        return self.username
+        return str(self.id)
 
 
 class Review(db.Document):

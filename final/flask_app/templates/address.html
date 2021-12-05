@@ -1,0 +1,7 @@
+<div class="container">
+    {{ g.address1 }}<br/>
+    {% if g.address2 != "" %}
+    {{ g.address2 }}<br/>
+    {% endif %}
+    {{ g.state }} {{ g.zip }}, {{ g.country }}
+</div>
