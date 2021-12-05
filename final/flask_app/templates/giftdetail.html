@@ -1,5 +1,7 @@
 {% extends "header.html" %}
 {% block content %}
+
+{{ pagedown.include_pagedown() }}
 <div class="container">
     <div class="col">
         {% with messages = get_flashed_messages() %}
@@ -67,7 +69,11 @@
     <div class="row">
         Comment:
         <div>
-            {{ m.comment|markdown or "Not yet received" }}
+            {% if m.comment %}
+            {{ m.comment|markdown }}
+            {% else %}
+            Not yet received
+            {% endif %}
         </div>
     </div>
     {% if m.giftReceiver == current_user and m.status == "Tracking Info Entered" %}

@@ -4,11 +4,21 @@ from flask_login import LoginManager
 from flask_bcrypt import Bcrypt
 from flask_pagedown import PageDown
 from flaskext.markdown import Markdown
+from flask_talisman import Talisman
 
 db = MongoEngine()
 bcrypt = Bcrypt()
 login_manager = LoginManager()
 pagedown = PageDown()
+
+CSP = {
+    'default-src': [
+        '\'self\'',
+        "*.fontawesome.com"
+    ],
+    'script-src': ["\'self\'", "\'unsafe-inline\'", "kit.fontawesome.com", "cdn.jsdelivr.net", "ajax.googleapis.com", "cdnjs.cloudflare.com"],
+    'style-src': ["\'self\'", "\'unsafe-inline\'", "cdn.jsdelivr.net", "*.fontawesome.com"]
+}
 
 
 from .users.routes import users
@@ -25,6 +35,7 @@ def create_app():
     bcrypt.init_app(app)
     pagedown.init_app(app)
     Markdown(app)
+    Talisman(app, content_security_policy=CSP, force_https=False)
 
     app.register_blueprint(users, url_prefix="/user")
     app.register_blueprint(gifts)
