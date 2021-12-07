@@ -17,7 +17,8 @@ CSP = {
         "*.fontawesome.com"
     ],
     'script-src': ["\'self\'", "\'unsafe-inline\'", "kit.fontawesome.com", "cdn.jsdelivr.net", "ajax.googleapis.com", "cdnjs.cloudflare.com"],
-    'style-src': ["\'self\'", "\'unsafe-inline\'", "cdn.jsdelivr.net", "*.fontawesome.com"]
+    'style-src': ["\'self\'", "\'unsafe-inline\'", "cdn.jsdelivr.net", "*.fontawesome.com"],
+    'img-src': ["\'self\'", "data:"]
 }
 
 
