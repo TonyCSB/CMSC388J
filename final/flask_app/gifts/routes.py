@@ -45,8 +45,12 @@ def request_gift():
 @gifts.route("/matched/<id>", methods=["GET", "POST"])
 @login_required
 def matched_gift(id):
-    gift = MatchedGift.objects(id=id).first()
-    if gift.giftSender != current_user:
+    try:
+        gift = MatchedGift.objects(id=id).first()
+    except Exception:
+        return redirect(url_for("gifts.index"))
+
+    if gift is None or gift.giftSender != current_user:
         return redirect(url_for("gifts.index"))
 
 
@@ -62,10 +66,17 @@ def matched_gift(id):
 @gifts.route("/gift/detail/<id>", methods=["GET", "POST"])
 @login_required
 def detail(id):
-    gift = GiftRequest.objects(id=id).first()
-    match = MatchedGift.objects(gift=gift).first()
+    try:
+        gift = GiftRequest.objects(id=id).first()
+        match = MatchedGift.objects(gift=gift).first()
+    except Exception:
+        return redirect(url_for("gifts.index"))
+
     form = UpdateTrackingForm()
     commentform = CommentForm()
+
+    if gift is None:
+        return redirect(url_for("gifts.index"))
 
     if gift.matched and match.giftName is None and match.giftSender == current_user:
         return redirect(url_for("gifts.matched_gift", id=match.id))

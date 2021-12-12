@@ -28,3 +28,31 @@
 .alert.alert-warning {
     margin-bottom: 0;
 }
+
+.requirements
+{
+    list-style-type: none;
+}
+
+.wrong .fa-check
+{
+    display: none;
+}
+
+.good .fa-times
+{
+    display: none;
+}
+
+ul {
+    padding-left: 0%;
+    text-align: left;
+}
+
+.green-text {
+    color: green;
+}
+
+.red-text {
+    color: red;
+}

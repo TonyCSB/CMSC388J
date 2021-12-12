@@ -5,6 +5,8 @@ from .. import bcrypt
 from ..models import GiftRequest, MatchedGift, User
 from ..forms import RegistrationForm, LoginForm
 
+import string
+
 users = Blueprint("users", __name__)
 
 # @user.route("/")
@@ -18,6 +20,12 @@ def register():
 
     form = RegistrationForm()
     if form.validate_on_submit():
+        p = form.password.data
+
+        if (len(p) < 8 or len(list(filter(lambda x: x in string.ascii_uppercase, p))) == 0 or len(list(filter(lambda x: x in string.digits, p))) == 0 or len(list(filter(lambda x: x in "!@#$%^&*()-_=+[{]}\\|;:'\",<.>/?`~", p))) == 0):
+            flash("Password Requirement Not Met\nYou have been a naughty boy this year")
+            return render_template("register.html", title="Account Registration", form=form)
+
         hashed = bcrypt.generate_password_hash(form.password.data).decode("utf-8")
         user = User(username=form.username.data, email=form.email.data, password=hashed)
         user.save()

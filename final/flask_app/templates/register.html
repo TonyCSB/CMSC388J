@@ -34,7 +34,7 @@
                     {% endfor %}
                 </div>
                 {% endif %}
-            </div>            
+            </div>
             <div class="form-floating">
                 {{ form.email(class="form-control", placeholder="email@example.com", type="email") }}
                 {{ form.email.label() }}
@@ -74,7 +74,27 @@
                 {{ form.submit(class="w-100 btn btn-lg btn-primary") }}
             </div>
         </form>
+
+        <!-- <div class="container"> -->
+        <hr />
+
+        <div class="alert alert-warning password-alert" role="alert">
+            <ul>
+                <li class="requirements leng"><i class="fas fa-check green-text"></i><i
+                        class="fas fa-times red-text"></i> At least 8 characters</li>
+                <li class="requirements big-letter"><i class="fas fa-check green-text"></i><i
+                        class="fas fa-times red-text"></i> At least 1 capital letter</li>
+                <li class="requirements num"><i class="fas fa-check green-text"></i><i
+                        class="fas fa-times red-text"></i> At least 1 number</li>
+                <li class="requirements special-char"><i class="fas fa-check green-text"></i><i
+                        class="fas fa-times red-text"></i> At least 1 special characters</li>
+            </ul>
+        </div>
+        <!-- </div> -->
     </main>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+    <script src="{{ url_for('static', filename='js/register.js') }}"></script>
 </div>
 
 {% endblock %}
