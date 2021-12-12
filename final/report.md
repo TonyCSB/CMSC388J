@@ -51,8 +51,8 @@ Talisman and CSRF are used to protect the website. CSP is used to control conten
 `flask_app/gifts/routes.py`
 
 1. [Gift Request Page](https://cmsc388j.tonychen.page/request)
-2. [Gift Matched Selection Page](https://cmsc388j.tonychen.page/matched/<id>)
-3. [Gift Detail Page](https://cmsc388j.tonychen.page/gift/detail/<id>)
+2. [Gift Matched Selection Page (Needs Gift ID in Link)](https://cmsc388j.tonychen.page/matched/<id>)
+3. [Gift Detail Page (Needs Gift ID in Link)](https://cmsc388j.tonychen.page/gift/detail/<id>)
 
 ### Presentation/Appearance
 
@@ -61,6 +61,7 @@ Bootstrap is used in all pages.
 ### Use of new Python package
 
 `flask_app/forms.py`
+
 `flask_app/templates/giftdetail.html`
 
 `Flask-Pagedown` and `Flask-Markdown`, they are used in gift detail page to submit and display comment in Markdown format.
